@@ -67,6 +67,6 @@ jobs:
             - name: Build e analise
               working-directory: ./
               run: |
-                dotnet sonarscanner begin /k:"ElizaFlixAPI" /d:sonar.host.url="${{secrets.SONARQUBE_URL}}"  /d:sonar.login="${{secrets.SONARQUBE_KEY}}"
+                dotnet sonarscanner begin /k:"ElizaFlixAPI" /d:sonar.host.url="${{env.SONARQUBE_URL}}"  /d:sonar.login="${{env.SONARQUBE_KEY}}"
                 dotnet build ./ElizaFlixAPI.sln
-                dotnet sonarscanner end /d:sonar.login="${{secrets.SONARQUBE_KEY}}"
+                dotnet sonarscanner end /d:sonar.login="${{env.SONARQUBE_KEY}}"
