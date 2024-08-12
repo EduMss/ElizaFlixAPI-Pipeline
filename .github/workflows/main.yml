@@ -47,3 +47,4 @@ jobs:
           tags: |
             edumss/elizaflixapi:latest
             edumss/elizaflixapi:v${{github.run_number}}
+        

@@ -17,4 +17,29 @@ jobs:
             - name: Execução do Teste de Unidade
               working-directory: ./
               run: dotnet test ./ElizaFlixAPI.csproj
-              
+
+    integration-test:
+        name: Teste de Integração
+        runs-on: ubuntu-latest
+        services:
+            postgres:
+                image: postgres:latest
+                ports:
+                    - 5432:5432
+                env:
+                    POSTGRES_USER: postgres
+                    POSTGRES_PASSWORD: postgres
+                    POSTGRES_DB: elizaflix
+
+        steps:
+            - name: Obtendo o código do projeto
+              uses: actions/checkout@v4
+
+            - name: Setup dotnet
+              uses: actions/setup-dotnet@v4
+              with:
+                dotnet-version: "8.0.300"
+
+            - name: Executar testes de Integração
+              working-directory: ./
+              run: dotnet test ./ElizaFlixAPI.csproj
