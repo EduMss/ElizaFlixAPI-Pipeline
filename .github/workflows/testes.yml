@@ -43,3 +43,29 @@ jobs:
             - name: Executar testes de Integração
               working-directory: ./
               run: dotnet test ./ElizaFlixAPI.csproj
+
+
+
+    sonarqube:
+        name: Scan com o SonarQube
+        runs-on: ubuntu-latest
+        steps:
+            - name: Setup JDK
+              uses: actions/setup-java@v4
+              with:
+                java-version: '21'
+            
+            - name: Setup dotnet
+              uses: actions/setup-dotnet@v4
+              with:
+                dotnet-version: "8.0.300"
+            
+            - name: Instalação do SonarQube Scanner
+              run: dotnet tool install --global dotnet-sonarscanner
+
+            - name: Build e analise
+              working-directory: ./
+              run: |
+                dotnet sonarscanner begin /k:"ElizaFlixAPI" /d:sonar.host.url="http://179.215.15.234:9000"  /d:sonar.login="sqp_924836c0440be8aff7accc7c38efc3da5c6577ab"
+                dotnet build ElizaFlixAPI.sln
+                dotnet sonarscanner end /d:sonar.login="sqp_924836c0440be8aff7accc7c38efc3da5c6577ab"
