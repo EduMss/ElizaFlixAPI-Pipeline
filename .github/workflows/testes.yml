@@ -68,5 +68,5 @@ jobs:
               working-directory: ./
               run: |
                 dotnet sonarscanner begin /k:"ElizaFlixAPI" /d:sonar.host.url="http://179.215.15.234:9000"  /d:sonar.login="sqp_924836c0440be8aff7accc7c38efc3da5c6577ab"
-                dotnet build ElizaFlixAPI.sln
+                dotnet build ./ElizaFlixAPI.sln
                 dotnet sonarscanner end /d:sonar.login="sqp_924836c0440be8aff7accc7c38efc3da5c6577ab"
